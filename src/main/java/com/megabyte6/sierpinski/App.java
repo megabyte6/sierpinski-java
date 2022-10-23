@@ -1,5 +1,7 @@
 package com.megabyte6.sierpinski;
 
+import static java.lang.Math.sqrt;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -18,6 +20,11 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
+    private final int WIDTH = 600;
+    private final int HEIGHT = 400;
+
+    private final int SCROLL_SPEED = 30;
+    private final int DETAIL_LEVEL = 6;
     private final Background BACKGROUND_COLOR = new Background(
             new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY));
     private final Color FILL_COLOR = Color.BEIGE;
@@ -25,6 +32,8 @@ public class App extends Application {
 
     private final Pane root = new Pane();
     private final Scene scene = new Scene(root);
+
+    private int triangleHeight = HEIGHT;
 
     private boolean reloadKeyHeld = false;
 
@@ -37,12 +46,17 @@ public class App extends Application {
         root.setBackground(BACKGROUND_COLOR);
 
         // Add event listeners.
-        scene.widthProperty().addListener(ob -> render(root));
-        scene.heightProperty().addListener(ob -> render(root));
+        scene.widthProperty().addListener(ob -> render());
+        scene.heightProperty().addListener(ob -> render());
         scene.setOnScroll(new EventHandler<ScrollEvent>() {
             @Override
             public void handle(ScrollEvent event) {
-                render(root);
+                if (event.getDeltaY() > 0) {
+                    triangleHeight += SCROLL_SPEED;
+                } else {
+                    triangleHeight -= SCROLL_SPEED;
+                }
+                render();
             }
         });
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -50,7 +64,7 @@ public class App extends Application {
             public void handle(KeyEvent event) {
                 if (event.getCode() == KeyCode.R && reloadKeyHeld == false) {
                     reloadKeyHeld = true;
-                    render(root);
+                    render();
                 }
             }
         });
@@ -68,23 +82,43 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Sierpinski's Triangle");
-        primaryStage.setWidth(600);
-        primaryStage.setHeight(400);
+        primaryStage.setWidth(WIDTH);
+        primaryStage.setHeight(HEIGHT);
         primaryStage.setScene(scene);
 
         // Show initialized window.
         primaryStage.show();
-        render(root);
+        render();
     }
 
-    public void render(Pane root) {
-        Point2D p1 = new Point2D(root.getWidth() / 2, 0);
-        Point2D p2 = new Point2D(0, root.getHeight());
-        Point2D p3 = new Point2D(root.getWidth(), root.getHeight());
+    private void render() {
+        // Check if the triangle is too small or too big.
+        if (triangleHeight < root.getHeight()) {
+            triangleHeight *= 2;
+        } else if (triangleHeight > root.getHeight() * 2) {
+            triangleHeight /= 2;
+        }
 
-        root.getChildren().clear(); // Clear the pane before redisplay
+        // Use the equation h = (√3 / 2) * a
+        // Where h is the height, a is the side length.
 
-        displayTriangles(5, p1, p2, p3);
+        // Calculate side length.
+        final double sideLength = triangleHeight / (sqrt(3) / 2);
+        // Find points of outermost triangle.
+        Point2D p1 = new Point2D(
+                root.getWidth() / 2,
+                0);
+        Point2D p2 = new Point2D(
+                (root.getWidth() / 2) - (sideLength / 2),
+                triangleHeight);
+        Point2D p3 = new Point2D(
+                (root.getWidth() / 2) + (sideLength / 2),
+                triangleHeight);
+
+        // Clear the pane before rerender
+        root.getChildren().clear();
+
+        displayTriangles(DETAIL_LEVEL, p1, p2, p3);
     }
 
     private void displayTriangles(int levels, Point2D p1, Point2D p2, Point2D p3) {
