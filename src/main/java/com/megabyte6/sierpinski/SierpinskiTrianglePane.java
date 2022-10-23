@@ -14,9 +14,6 @@ public class SierpinskiTrianglePane extends Pane {
         paint();
     }
 
-    SierpinskiTrianglePane() {
-    }
-
     protected void paint() {
         // Select three points in proportion to the pane size
         Point2D p1 = new Point2D(getWidth() / 2, 10);
