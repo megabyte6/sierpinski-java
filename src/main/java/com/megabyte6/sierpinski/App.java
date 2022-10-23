@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     private Pane root = new Pane();
-    private Scene mainScene = new Scene(root);
+    private Scene scene = new Scene(root);
 
     private boolean reloadKeyHeld = false;
 
@@ -26,15 +26,15 @@ public class App extends Application {
     @Override
     public void init() throws Exception {
         // Add event listeners.
-        root.widthProperty().addListener(ob -> render(root));
-        root.heightProperty().addListener(ob -> render(root));
-        mainScene.setOnScroll(new EventHandler<ScrollEvent>() {
+        scene.widthProperty().addListener(ob -> render(root));
+        scene.heightProperty().addListener(ob -> render(root));
+        scene.setOnScroll(new EventHandler<ScrollEvent>() {
             @Override
             public void handle(ScrollEvent event) {
                 render(root);
             }
         });
-        mainScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode() == KeyCode.R && reloadKeyHeld == false) {
@@ -43,7 +43,7 @@ public class App extends Application {
                 }
             }
         });
-        mainScene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode() == KeyCode.R)
@@ -59,7 +59,7 @@ public class App extends Application {
         primaryStage.setTitle("Sierpinski's Triangle");
         primaryStage.setWidth(600);
         primaryStage.setHeight(400);
-        primaryStage.setScene(mainScene);
+        primaryStage.setScene(scene);
 
         // Show initialized window.
         primaryStage.show();
