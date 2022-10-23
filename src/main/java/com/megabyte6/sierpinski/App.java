@@ -2,11 +2,15 @@ package com.megabyte6.sierpinski;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -14,8 +18,13 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
-    private Pane root = new Pane();
-    private Scene scene = new Scene(root);
+    private final Background BACKGROUND_COLOR = new Background(
+            new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY));
+    private final Color FILL_COLOR = Color.BEIGE;
+    private final Color STROKE_COLOR = Color.GRAY;
+
+    private final Pane root = new Pane();
+    private final Scene scene = new Scene(root);
 
     private boolean reloadKeyHeld = false;
 
@@ -25,6 +34,8 @@ public class App extends Application {
 
     @Override
     public void init() throws Exception {
+        root.setBackground(BACKGROUND_COLOR);
+
         // Add event listeners.
         scene.widthProperty().addListener(ob -> render(root));
         scene.heightProperty().addListener(ob -> render(root));
@@ -67,10 +78,9 @@ public class App extends Application {
     }
 
     public void render(Pane root) {
-        // Select three points in proportion to the pane size
         Point2D p1 = new Point2D(root.getWidth() / 2, 0);
-        Point2D p2 = new Point2D(10, root.getHeight());
-        Point2D p3 = new Point2D(root.getWidth() - 10, root.getHeight());
+        Point2D p2 = new Point2D(0, root.getHeight());
+        Point2D p3 = new Point2D(root.getWidth(), root.getHeight());
 
         root.getChildren().clear(); // Clear the pane before redisplay
 
@@ -81,22 +91,21 @@ public class App extends Application {
         if (levels == 0) {
             // Draw a triangle to connect three points
             Polygon triangle = new Polygon();
-            triangle.getPoints().addAll(p1.getX(), p1.getY(), p2.getX(),
-                    p2.getY(), p3.getX(), p3.getY());
-            triangle.setStroke(Color.BLACK);
-            triangle.setFill(Color.WHITE);
+            triangle.getPoints().addAll(p1.getX(), p1.getY(), p2.getX(), p2.getY(), p3.getX(), p3.getY());
+            triangle.setStroke(STROKE_COLOR);
+            triangle.setFill(FILL_COLOR);
 
             root.getChildren().add(triangle);
         } else {
-            // Get the midpoint on each edge in the triangle
-            Point2D p12 = p1.midpoint(p2);
-            Point2D p23 = p2.midpoint(p3);
-            Point2D p31 = p3.midpoint(p1);
+            // Get the midpoint of the side of the triangle
+            Point2D p1_2 = p1.midpoint(p2);
+            Point2D p2_3 = p2.midpoint(p3);
+            Point2D p3_1 = p3.midpoint(p1);
 
-            // Recursively display three triangles
-            displayTriangles(levels - 1, p1, p12, p31);
-            displayTriangles(levels - 1, p12, p2, p23);
-            displayTriangles(levels - 1, p31, p23, p3);
+            // Recursively draw the inner triangles.
+            displayTriangles(levels - 1, p1, p1_2, p3_1);
+            displayTriangles(levels - 1, p1_2, p2, p2_3);
+            displayTriangles(levels - 1, p3_1, p2_3, p3);
         }
     }
 
