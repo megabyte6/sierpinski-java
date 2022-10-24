@@ -28,7 +28,7 @@ public class App extends Application {
     private final Background BACKGROUND_COLOR = new Background(
             new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY));
     private final Color FILL_COLOR = Color.BEIGE;
-    private final Color STROKE_COLOR = Color.GRAY;
+    private final Color STROKE_COLOR = Color.GREY;
 
     private final Pane root = new Pane();
     private final Scene scene = new Scene(root);
