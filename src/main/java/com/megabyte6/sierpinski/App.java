@@ -26,9 +26,9 @@ public class App extends Application {
     private final int SCROLL_SPEED = 30;
     private final int DETAIL_LEVEL = 6;
     private final Background BACKGROUND_COLOR = new Background(
-            new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY));
-    private final Color FILL_COLOR = Color.BEIGE;
-    private final Color STROKE_COLOR = Color.GREY;
+            new BackgroundFill(Color.LIGHTSTEELBLUE, CornerRadii.EMPTY, Insets.EMPTY));
+    private final Color FILL_COLOR = Color.LIGHTSTEELBLUE;
+    private final Color STROKE_COLOR = Color.ALICEBLUE;
 
     private final Pane root = new Pane();
     private final Scene scene = new Scene(root);
