@@ -16,6 +16,8 @@ dependencies {
 }
 
 ext.os = org.gradle.internal.os.OperatingSystem.current()
+appVersion = project.appVersion
+javafxVersion = project.javafxVersion
 
 application {
     // Define the main class for the application.
@@ -24,7 +26,7 @@ application {
 }
 
 javafx {
-    version = "19"
+    version = "${javafxVersion}"
     modules = [ 'javafx.controls' ]
 }
 
@@ -39,7 +41,7 @@ jlink {
         noConsole = true
     }
     jpackage {
-        appVersion = 1.0
+        appVersion = appVersion
         imageName = "Sierpinski"
         installerName = "Sierpinski"
         icon = "src/main/resources/icon.ico"
