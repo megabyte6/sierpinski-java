@@ -12,6 +12,9 @@ repositories {
     mavenCentral()
 }
 
+sourceCompatibility = 17
+targetCompatibility = 17
+
 dependencies {
 }
 
@@ -78,5 +81,12 @@ jlink {
                 '--win-shortcut-prompt'
             ]
         }
+    }
+}
+
+tasks.jlink.doLast {
+    copy {
+        from('src/main/resources')
+        into("$buildDir/image/bin")
     }
 }
