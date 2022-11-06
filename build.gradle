@@ -18,6 +18,7 @@ dependencies {
 ext.os = org.gradle.internal.os.OperatingSystem.current()
 appVersion = project.appVersion
 javafxVersion = project.javafxVersion
+jpackageTargetPlatform = project.jpackageTargetPlatform
 
 application {
     // Define the main class for the application.
@@ -26,7 +27,7 @@ application {
 }
 
 javafx {
-    version = "${javafxVersion}"
+    version = javafxVersion
     modules = [ 'javafx.controls' ]
 }
 
@@ -40,33 +41,34 @@ jlink {
         '--no-header-files',
         '--no-man-pages'
     ]
-    targetPlatform("linux-aarch64") {
-        jdkHome = jdkDownload("https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_aarch64_linux_hotspot_17.0.5_8.tar.gz")
-        addExtraModulePath("jmods/linux/aarch64")
+    targetPlatform('linux-aarch64') {
+        jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_aarch64_linux_hotspot_17.0.5_8.tar.gz')
+        addExtraModulePath('jmods/linux/aarch64')
     }
-    targetPlatform("linux-x64") {
-        jdkHome = jdkDownload("https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_x64_linux_hotspot_17.0.5_8.tar.gz")
-        addExtraModulePath("jmods/linux/x64")
+    targetPlatform('linux-x64') {
+        jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_x64_linux_hotspot_17.0.5_8.tar.gz')
+        addExtraModulePath('jmods/linux/x64')
     }
-    targetPlatform("macos-aarch64") {
-        jdkHome = jdkDownload("https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_aarch64_mac_hotspot_17.0.5_8.tar.gz")
-        addExtraModulePath("jmods/macos/aarch64")
+    targetPlatform('macos-aarch64') {
+        jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_aarch64_mac_hotspot_17.0.5_8.tar.gz')
+        addExtraModulePath('jmods/macos/aarch64')
     }
-    targetPlatform("macos-x64") {
-        jdkHome = jdkDownload("https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_x64_mac_hotspot_17.0.5_8.tar.gz")
-        addExtraModulePath("jmods/macos/x64")
+    targetPlatform('macos-x64') {
+        jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_x64_mac_hotspot_17.0.5_8.tar.gz')
+        addExtraModulePath('jmods/macos/x64')
     }
-    targetPlatform("win-x64") {
-        jdkHome = jdkDownload("https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_x64_windows_hotspot_17.0.5_8.zip")
-        addExtraModulePath("jmods/win/x64")
+    targetPlatform('win-x64') {
+        jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_x64_windows_hotspot_17.0.5_8.zip')
+        addExtraModulePath('jmods/win/x64')
     }
 
     jpackage {
+        targetPlatformName = jpackageTargetPlatform
         appVersion = appVersion
-        imageName = "Sierpinski"
-        installerName = "Sierpinski"
-        icon = "src/main/resources/icon.ico"
-        vendor = "Brayden Chan"
+        imageName = 'Sierpinski'
+        installerName = 'Sierpinski-installer'
+        icon = 'src/main/resources/icon.ico'
+        vendor = 'Brayden Chan'
 
         if (os.windows) {
             installerOptions = [
