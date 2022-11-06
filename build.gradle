@@ -23,7 +23,7 @@ jpackageTargetPlatform = project.jpackageTargetPlatform
 application {
     // Define the main class for the application.
     mainClass = 'com.megabyte6.sierpinski.App'
-    mainModule = "sierpinski"
+    mainModule = 'sierpinski'
 }
 
 javafx {
