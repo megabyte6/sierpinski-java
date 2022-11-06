@@ -20,7 +20,7 @@ This project is a simple Sierpinski's Triangle app that I wrote to learn JavaFX.
 
 ## Controls
 - Scroll to zoom in and out.
-- Press `r` to reload the window.
+- Press `r` to re-render the screen if something goes wrong.
 
 ## Building
 - Prerequisites
