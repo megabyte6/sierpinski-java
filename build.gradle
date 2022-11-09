@@ -15,10 +15,12 @@ repositories {
 dependencies {
 }
 
-ext.os = org.gradle.internal.os.OperatingSystem.current()
-appVersion = project.appVersion
-javafxVersion = project.javafxVersion
-jpackageTargetPlatform = project.jpackageTargetPlatform
+ext {
+    os = org.gradle.internal.os.OperatingSystem.current()
+    appVersion = project.appVersion
+    javafxVersion = project.javafxVersion
+    jpackageTargetPlatform = project.jpackageTargetPlatform
+}
 
 application {
     // Define the main class for the application.
