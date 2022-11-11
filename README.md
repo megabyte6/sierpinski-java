@@ -1,7 +1,7 @@
 # Sierpinski
 
 ## About
-This project is a simple Sierpinski's Triangle app that I wrote to learn JavaFX.
+This project is a simple Sierpinski's Triangle app that I wrote to learn how to use JavaFX, jLink, and jPackage.
 
 ## How to use
 
