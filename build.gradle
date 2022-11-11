@@ -7,19 +7,26 @@ plugins {
     id 'org.beryx.jlink' version '2.25.0'
 }
 
+ext {
+    // Set the current version of the app.
+    appVersion = 1.2
+
+    // Version of JavaFX to use.
+    javafxVersion = 19
+
+    // Compile target for jPackage
+    // Options: linux-aarch64, linux-x64, macos-aarch64, macos-x64, win-x64
+    jpackageTargetPlatform = 'win-x64'
+
+    os = org.gradle.internal.os.OperatingSystem.current()
+}
+
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
 
 dependencies {
-}
-
-ext {
-    os = org.gradle.internal.os.OperatingSystem.current()
-    appVersion = project.appVersion
-    javafxVersion = project.javafxVersion
-    jpackageTargetPlatform = project.jpackageTargetPlatform
 }
 
 application {
@@ -43,22 +50,22 @@ jlink {
         '--no-header-files',
         '--no-man-pages'
     ]
-    targetPlatform('linux-aarch64') {
-        jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_aarch64_linux_hotspot_17.0.5_8.tar.gz')
-        addExtraModulePath('jmods/linux/aarch64')
-    }
+    // targetPlatform('linux-aarch64') {
+    //     jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_aarch64_linux_hotspot_17.0.5_8.tar.gz')
+    //     addExtraModulePath('jmods/linux/aarch64')
+    // }
     targetPlatform('linux-x64') {
         jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_x64_linux_hotspot_17.0.5_8.tar.gz')
         addExtraModulePath('jmods/linux/x64')
     }
-    targetPlatform('macos-aarch64') {
-        jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_aarch64_mac_hotspot_17.0.5_8.tar.gz')
-        addExtraModulePath('jmods/macos/aarch64')
-    }
-    targetPlatform('macos-x64') {
-        jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_x64_mac_hotspot_17.0.5_8.tar.gz')
-        addExtraModulePath('jmods/macos/x64')
-    }
+    // targetPlatform('macos-aarch64') {
+    //     jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_aarch64_mac_hotspot_17.0.5_8.tar.gz')
+    //     addExtraModulePath('jmods/macos/aarch64')
+    // }
+    // targetPlatform('macos-x64') {
+    //     jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_x64_mac_hotspot_17.0.5_8.tar.gz')
+    //     addExtraModulePath('jmods/macos/x64')
+    // }
     targetPlatform('win-x64') {
         jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_x64_windows_hotspot_17.0.5_8.zip')
         addExtraModulePath('jmods/win/x64')
