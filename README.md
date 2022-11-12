@@ -6,14 +6,14 @@ This project is a simple Sierpinski's Triangle app that I wrote to learn how to 
 ## How to use
 
 ### MacOS, Linux, & Portable builds.
-1. Go to [releases](https://github.com/megabyte6/sierpinski/releases).
+1. Go to [releases](https://github.com/megabyte6/sierpinski/releases/latest).
 1. Download either the `.zip` file for your system.
 1. Extract the file.
 1. Navigate to the `bin` folder.
 1. Run `sierpinski` (or `sierpinski.bat` if you're on windows)
 
 ### Windows
-1. Go to [releases](https://github.com/megabyte6/sierpinski/releases)
+1. Go to [releases](https://github.com/megabyte6/sierpinski/releases/latest)
 1. Download `Sierpinski-installer.msi` (recommended) or `Sierpinski-installer.exe`
 1. Run the installer.
 1. Have fun!
