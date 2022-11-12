@@ -8,17 +8,17 @@ plugins {
 }
 
 ext {
-    // Set the current version of the app.
-    appVersion = 1.2
+    os = org.gradle.internal.os.OperatingSystem.current()
 
-    // Version of JavaFX to use.
+    // Set the version of the app.
+    version = '1.2'
+
+    // Set the version of JavaFX to use.
     javafxVersion = 19
 
-    // Compile target for jPackage
-    // Options: linux-aarch64, linux-x64, macos-aarch64, macos-x64, win-x64
+    // Compile target for the jPackage task.
+    // Options: linux-aarch64, linux-x64, macos-aarch64, macos-x64, win-x64.
     jpackageTargetPlatform = 'win-x64'
-
-    os = org.gradle.internal.os.OperatingSystem.current()
 }
 
 repositories {
@@ -73,7 +73,6 @@ jlink {
 
     jpackage {
         targetPlatformName = jpackageTargetPlatform
-        appVersion = appVersion
         imageName = 'Sierpinski'
         installerName = 'Sierpinski-installer'
         icon = 'src/main/resources/icon.ico'
