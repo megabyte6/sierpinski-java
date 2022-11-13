@@ -11,7 +11,7 @@ ext {
     os = org.gradle.internal.os.OperatingSystem.current()
 
     // Set the version of the app.
-    version = '1.2'
+    appVersion = '1.2'
 
     // Set the version of JavaFX to use.
     javafxVersion = 19
@@ -20,6 +20,8 @@ ext {
     // Options: linux-aarch64, linux-x64, macos-aarch64, macos-x64, win-x64.
     jpackageTargetPlatform = 'win-x64'
 }
+
+version = appVersion
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -41,15 +43,17 @@ javafx {
 }
 
 jlink {
-    launcher {
-        noConsole = true
-    }
     options = [
         '--strip-debug',
         '--compress', '2',
         '--no-header-files',
         '--no-man-pages'
     ]
+    launcher {
+        noConsole = true
+    }
+    imageZip = file("$buildDir/sierpinski.zip")
+
     targetPlatform('linux-aarch64') {
         jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_aarch64_linux_hotspot_17.0.5_8.tar.gz')
         addExtraModulePath('jmods/linux/aarch64')
