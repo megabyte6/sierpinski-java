@@ -2,19 +2,19 @@ plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
     // Apply javafxplugin for JavaFX support.
-    id 'org.openjfx.javafxplugin' version '0.0.11'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
     // Apply jlink for building the app.
-    id 'org.beryx.jlink' version '2.25.0'
+    id 'org.beryx.jlink' version '3.0.0'
 }
 
 ext {
     os = org.gradle.internal.os.OperatingSystem.current()
 
     // Set the version of the app.
-    appVersion = '1.2'
+    appVersion = '1.3'
 
     // Set the version of JavaFX to use.
-    javafxVersion = 19
+    javafxVersion = '21.0.3'
 
     // Compile target for the jPackage task.
     // Options: linux-aarch64, linux-x64, macos-aarch64, macos-x64, win-x64.
@@ -54,24 +54,20 @@ jlink {
     }
     imageZip = file("$buildDir/sierpinski.zip")
 
-    targetPlatform('linux-aarch64') {
-        jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_aarch64_linux_hotspot_17.0.5_8.tar.gz')
-        addExtraModulePath('jmods/linux/aarch64')
-    }
     targetPlatform('linux-x64') {
-        jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_x64_linux_hotspot_17.0.5_8.tar.gz')
+        jdkHome = jdkDownload('https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.3%2B9/OpenJDK21U-jdk_x64_linux_hotspot_21.0.3_9.tar.gz')
         addExtraModulePath('jmods/linux/x64')
     }
     targetPlatform('macos-aarch64') {
-        jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_aarch64_mac_hotspot_17.0.5_8.tar.gz')
+        jdkHome = jdkDownload('https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.3%2B9/OpenJDK21U-jdk_aarch64_mac_hotspot_21.0.3_9.tar.gz')
         addExtraModulePath('jmods/macos/aarch64')
     }
     targetPlatform('macos-x64') {
-        jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_x64_mac_hotspot_17.0.5_8.tar.gz')
+        jdkHome = jdkDownload('https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.3%2B9/OpenJDK21U-jdk_x64_mac_hotspot_21.0.3_9.tar.gz')
         addExtraModulePath('jmods/macos/x64')
     }
     targetPlatform('win-x64') {
-        jdkHome = jdkDownload('https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.5%2B8/OpenJDK17U-jdk_x64_windows_hotspot_17.0.5_8.zip')
+        jdkHome = jdkDownload('https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.3%2B9/OpenJDK21U-jdk_x64_windows_hotspot_21.0.3_9.zip')
         addExtraModulePath('jmods/win/x64')
     }
 

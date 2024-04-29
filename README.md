@@ -31,9 +31,9 @@ Have fun!
 
 ## Building
 - Prerequisites
-    - JDK 17
+    - JDK 21
         - [Adoptium](https://adoptium.net/temurin/releases)
-        - [Adoptium GitHub](https://github.com/adoptium/temurin17-binaries/releases)
+        - [Adoptium GitHub](https://github.com/adoptium/temurin21-binaries/releases)
     - A bit of command line knowledge
 1. Clone this repository.
 1. Open a terminal to the cloned project.
