@@ -4,7 +4,7 @@ plugins {
     // Apply javafxplugin for JavaFX support.
     id 'org.openjfx.javafxplugin' version '0.1.0'
     // Apply jlink for building the app.
-    id 'org.beryx.jlink' version '3.0.0'
+    id 'org.beryx.jlink' version '3.0.1'
 }
 
 ext {
